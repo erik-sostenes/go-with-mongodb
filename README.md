@@ -15,9 +15,27 @@
         <th>Default value</th>
     </tr>
     <tr>
-        <td>PORT</td>
-        <td>Setting the api port</td>
-        <td>Yes</td>
-        <td>8080</td>
+        <td>NoSQL_USER</td>
+        <td>Setting Mongodb database User</td>
+        <td>NO</td>
+        <td>:27017</td>
+    </tr>
+    <tr>
+        <td>NoSQL_PASSWORD</td>
+        <td>Setting MongoDB Database Password</td>
+        <td>NO</td>
+        <td>optional</td>
+    </tr>
+    <tr>
+        <td>NoSQL_DATABASE</td>
+        <td>Setting MongoDB Database Name</td>
+        <td>NO</td>
+        <td>optional</td>
+    </tr>
+    <tr>
+        <td>NoSQL_TIMEOUT</td>
+        <td>Setting MongoDB Database Timeout</td>
+        <td>NO</td>
+        <td>optional</td>
     </tr>
 </table>
