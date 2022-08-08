@@ -18,7 +18,7 @@
         <td>NoSQL_USER</td>
         <td>Setting Mongodb database User</td>
         <td>NO</td>
-        <td>:27017</td>
+        <td>27017</td>
     </tr>
     <tr>
         <td>NoSQL_PASSWORD</td>
