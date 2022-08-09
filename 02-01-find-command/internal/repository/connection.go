@@ -11,7 +11,7 @@ import (
 )
 
 func NewMongoClient(config MongoDB) (*mongo.Database, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), config.ConnectTimeout *time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), config.ConnectTimeout*time.Second)
 	defer cancel()
 
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(fmt.Sprintf(config.Uri,
@@ -19,7 +19,7 @@ func NewMongoClient(config MongoDB) (*mongo.Database, error) {
 		config.Password,
 	)))
 	if err != nil {
-		return nil, err 
+		return nil, err
 	}
 
 	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
