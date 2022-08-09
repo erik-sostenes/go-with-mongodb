@@ -22,8 +22,6 @@ func NewMongoClient(config MongoDB) (*mongo.Database, error) {
 		return nil, err 
 	}
 
-	defer client.Disconnect(context.TODO())
-
 	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
 		return nil, err
 	}
