@@ -61,3 +61,8 @@ func (a *account) FindAllAccounts(ctx context.Context) (accounts model.Accounts,
 	}
 	return
 }
+
+func (a *account) FindAccountById(ctx context.Context, accountId int) (account model.Account, err error) {
+	err = a.FindOne(ctx, bson.M{"account_id": accountId}).Decode(&account)
+	return
+}
