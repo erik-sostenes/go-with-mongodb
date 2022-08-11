@@ -43,3 +43,21 @@ func (a *account) FindNextAccount(ctx context.Context) (accounts model.Accounts,
 	}
 	return
 }
+
+func (a *account) FindAllAccounts(ctx context.Context) (accounts model.Accounts, err error) {
+	// Passing bson.M{} as the filter matches all documents in the collection
+	cur, err := a.Find(ctx, bson.M{})
+	if err != nil {
+		return
+	}
+	defer cur.Close(ctx)
+	// If your expected result set is large, using the *mongo.Cursor.All function might not be the best idea
+	if err = cur.All(ctx, &accounts); err != nil {
+		return
+	}
+
+	if len(accounts) == 0 {
+		err = mongo.ErrNoDocuments
+	}
+	return
+}
