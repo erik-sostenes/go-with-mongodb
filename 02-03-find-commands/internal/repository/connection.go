@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"fmt"
+	"sync"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -10,28 +10,28 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
+var (
+	syncMongo     sync.Once
+	mongoDataBase *mongo.Database
+	mongoClient   *mongo.Client
+	err           error
+)
+
+// NewClientMongo creates a new connection to mongoClient
+// use syncOnce to create only one instance of mongoClient
 func NewMongoClient(config MongoDB) (*mongo.Database, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), config.ConnectTimeout*time.Second)
-	defer cancel()
+	syncMongo.Do(func() {
+		ctx, cancel := context.WithTimeout(context.Background(), config.ConnectTimeout*time.Second)
+		defer cancel()
 
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(fmt.Sprintf(config.Uri,
-		config.User,
-		config.Password,
-	)))
-	if err != nil {
-		return nil, err
-	}
+		mongoClient, err = mongo.Connect(ctx, options.Client().ApplyURI(config.Dns))
+		err = mongoClient.Ping(context.TODO(), readpref.Primary())
 
-	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
-		return nil, err
-	}
+		mongoDataBase = mongoClient.Database(config.DatabaseName)
 
-	mongoDB := client.Database(config.DatabaseName)
-	if err = mongoDB.Client().Ping(context.TODO(), readpref.Primary()); err != nil {
-		return nil, err
-	}
-
-	return mongoDB, err
+		err = mongoDataBase.Client().Ping(context.TODO(), readpref.Primary())
+	})
+	return mongoDataBase, err
 }
 
 func NewMDB(config MongoDB) (mongoDB *mongo.Database) {
