@@ -17,6 +17,7 @@ var (
 	err           error
 )
 
+<<<<<<< HEAD
 // NewClientMongo creates a new connection to mongoClient
 // use syncOnce to create only one instance of mongoClient
 func NewMongoClient(config MongoDB) (*mongo.Database, error) {
@@ -26,6 +27,11 @@ func NewMongoClient(config MongoDB) (*mongo.Database, error) {
 
 		mongoClient, err = mongo.Connect(ctx, options.Client().ApplyURI(config.Dns))
 		err = mongoClient.Ping(context.TODO(), readpref.Primary())
+=======
+	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
+		return nil, err
+	}
+>>>>>>> 02-01-find-commands
 
 		mongoDataBase = mongoClient.Database(config.DatabaseName)
 
