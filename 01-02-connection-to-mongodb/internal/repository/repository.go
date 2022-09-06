@@ -4,7 +4,7 @@ import "time"
 
 // MongoDB contains the environment variables to configure the mongodb connection
 type MongoDB struct {
-	Uri,
+	Dns,
 	User,
 	Password,
 	DatabaseName string
