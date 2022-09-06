@@ -34,10 +34,8 @@ func TestFindNextAccount(t *testing.T) {
 	for name, ts := range tsc {
 		t.Run(name, func(t *testing.T) {
 			accounts, err := ts.account.FindNextAccount(context.TODO())
-			if err != nil {
-				if !errors.Is(err, ts.expectedError) {
-					t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
-				}
+			if !errors.Is(err, ts.expectedError) {
+				t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
 				t.SkipNow()
 			}
 
@@ -70,10 +68,8 @@ func TestFindAllAccounts(t *testing.T) {
 	for name, ts := range tsc {
 		t.Run(name, func(t *testing.T) {
 			accounts, err := ts.account.FindAllAccounts(context.TODO())
-			if err != nil {
-				if !errors.Is(err, ts.expectedError) {
-					t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
-				}
+			if !errors.Is(err, ts.expectedError) {
+				t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
 				t.SkipNow()
 			}
 
@@ -128,10 +124,8 @@ func TestFindAccountById(t *testing.T) {
 	for name, ts := range tsc {
 		t.Run(name, func(t *testing.T) {
 			account, err := ts.account.FindAccountById(context.TODO(), ts.accountId)
-			if err != nil {
-				if !errors.Is(err, ts.expectedError) {
-					t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
-				}
+			if !errors.Is(err, ts.expectedError) {
+				t.Fatalf("expected error %v, got %v error", ts.expectedError, err)
 				t.SkipNow()
 			}
 
