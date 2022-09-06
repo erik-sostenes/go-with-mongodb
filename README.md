@@ -15,8 +15,8 @@
         <th>Default value</th>
     </tr>
     <tr>
-        <td>NoSQL_USER</td>
-        <td>Setting Mongodb database User</td>
+        <td>NoSQL_PORT</td>
+        <td>Setting Mongodb database Port</td>
         <td>NO</td>
         <td>27017</td>
     </tr>
